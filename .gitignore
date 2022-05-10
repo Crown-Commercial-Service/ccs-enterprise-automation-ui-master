@@ -1,0 +1,71 @@
+
+.DS_Store
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
+.idea/workspace.xml
+target/CCS-Web-Master-1.0.0.jar
+target/classes/com/ccs/masterActions/ActionsClass.class
+target/classes/com/ccs/masterConfig/Config.class
+target/classes/com/ccs/masterConfig/Directory.class
+target/classes/com/ccs/masterConfig/DriverManager.class
+target/classes/com/ccs/masterConfig/ExcelManager.class
+target/classes/com/ccs/masterConfig/Executor.class
+target/classes/com/ccs/masterConfig/GlobalVariables.class
+target/classes/com/ccs/masterConfig/SessionDataManager$1.class
+target/classes/com/ccs/masterConfig/SessionDataManager.class
+target/classes/com/ccs/masterExceptions/InvalidKeywordException.class
+target/classes/com/ccs/masterExceptions/InvalidLocatorException.class
+target/classes/com/ccs/masterPages/ManageDropdowns.class
+target/classes/com/ccs/masterPages/ManageElements.class
+target/classes/com/ccs/masterPages/ManageFramesWindows.class
+target/classes/com/ccs/masterPages/ManageNavigations.class
+target/classes/com/ccs/masterPages/ManageSessionData.class
+target/classes/com/ccs/masterPages/ManageTextFields.class
+target/classes/com/ccs/masterPages/ManageVerifications.class
+target/classes/com/ccs/reports/ReportManager.class
+target/classes/com/ccs/runner/EmailSender$1.class
+target/classes/com/ccs/runner/EmailSender.class
+target/classes/com/ccs/runner/TestBase.class
+target/classes/com/ccs/runner/TestExecutor.class
+target/classes/com/ccs/utility/DateUtility.class
+target/classes/com/ccs/utility/ElementOperations.class
+target/classes/com/ccs/utility/ExcelReader.class
+target/classes/com/ccs/utility/Log.class
+target/classes/com/ccs/utility/ScreenshotUtility.class
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+target/surefire-reports/bullet_point.png
+target/surefire-reports/collapseall.gif
+target/surefire-reports/emailable-report.html
+target/surefire-reports/failed.png
+target/surefire-reports/index.html
+target/surefire-reports/jquery-1.7.1.min.js
+target/surefire-reports/junitreports/TEST-com.ccs.runner.TestExecutor.xml
+target/surefire-reports/KDD Suite/KDF Tests.html
+target/surefire-reports/KDD Suite/KDF Tests.xml
+target/surefire-reports/navigator-bullet.png
+target/surefire-reports/old/index.html
+target/surefire-reports/old/KDD Suite/classes.html
+target/surefire-reports/old/KDD Suite/groups.html
+target/surefire-reports/old/KDD Suite/index.html
+target/surefire-reports/old/KDD Suite/KDF Tests.properties
+target/surefire-reports/old/KDD Suite/main.html
+target/surefire-reports/old/KDD Suite/methods-alphabetical.html
+target/surefire-reports/old/KDD Suite/methods-not-run.html
+target/surefire-reports/old/KDD Suite/methods.html
+target/surefire-reports/old/KDD Suite/reporter-output.html
+target/surefire-reports/old/KDD Suite/testng.xml.html
+target/surefire-reports/old/KDD Suite/toc.html
+target/surefire-reports/passed.png
+target/surefire-reports/skipped.png
+target/surefire-reports/TEST-TestSuite.xml
+target/surefire-reports/testng-reports.css
+target/surefire-reports/testng-reports.js
+target/surefire-reports/testng-results.xml
+target/surefire-reports/testng.css
+target/surefire-reports/TestSuite.txt
