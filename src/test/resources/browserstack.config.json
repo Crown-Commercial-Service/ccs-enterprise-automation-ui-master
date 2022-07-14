@@ -1,0 +1,30 @@
+{
+  "server": "hub.browserstack.com",
+  "user": "mibinboban_v57Ycz",
+  "key": "VyBmsipsaKQMicWLzECV",
+  "capabilities": {
+    "build": "browserstack-build-1",
+    "name": "parallel_test",
+    "browserstack.debug": true
+  },
+  "environments": {
+    "env1": {
+      "browser": "chrome",
+      "browserVersion": "latest",
+      "os": "Windows",
+      "osVersion": "10"
+    },
+    "env2": {
+      "browser": "firefox",
+      "browserVersion": "latest",
+      "os": "Windows",
+      "osVersion": "10"
+    },
+    "env3": {
+      "browser": "safari",
+      "browserVersion": "latest",
+      "os": "OS X",
+      "osVersion": "Big Sur"
+    }
+  }
+}
