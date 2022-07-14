@@ -95,8 +95,9 @@ public class TestBase implements GlobalVariables{
 	}
 	
 	private static WebDriver launchBrowser(String config_file, String environment) throws Exception {
+		String url = Config.getProperty("url");
 		JSONParser parser = new JSONParser();
-		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/browserstack.config.json"));
+		JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/resources/"+ config_file));
 		JSONObject envs = (JSONObject) config.get("environments");
 
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -137,6 +138,8 @@ public class TestBase implements GlobalVariables{
 
 		driver = new RemoteWebDriver(
 				new URL("http://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub"), capabilities);
+		driver.manage().window().maximize();
+		driver.navigate().to(url);
 		return driver;
 	}
 
