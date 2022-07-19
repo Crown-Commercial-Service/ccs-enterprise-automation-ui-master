@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ccs</groupId>
 	<artifactId>CCS-Web-Master</artifactId>
-	<version>1.0.1c</version>
+	<version>1.0.1i</version>
 
 	<properties>
 		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
@@ -79,7 +79,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.141.59</version>
+			<version>4.1.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
