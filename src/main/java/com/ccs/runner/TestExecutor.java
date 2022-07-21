@@ -9,6 +9,8 @@
 
 package com.ccs.runner;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.ccs.masterConfig.ExcelManager;
 import com.ccs.masterConfig.Executor;
 import com.ccs.masterConfig.SessionDataManager;
@@ -18,6 +20,7 @@ import com.ccs.utility.ExcelReader;
 import com.ccs.utility.Log;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -33,11 +36,13 @@ public class TestExecutor extends TestBase{
 		SessionDataManager.getInstance().setSessionData("testStartTime", DateUtility.getStringDate("hh.mm.ss aaa"));
 		ExcelReader reader = new ExcelReader();
 		ExcelManager.getInstance().setExcelReader(reader);
-		Executor executor = new Executor();		
+		Executor executor = new Executor();
 		SessionDataManager.getInstance().setSessionData("testCaseName", testCase);
 		SessionDataManager.getInstance().setSessionData("testCaseRow", testRow);
 		Log.startTestCase(testCase);
 		ReportManager.startTest(testCase);
+		ReportManager.getTest().debug(MarkupHelper.createLabel("Browser : "+(String) SessionDataManager.getInstance().getSessionData("envName").toString().toUpperCase(), ExtentColor.GREEN));
+		ReportManager.getTest().debug(MarkupHelper.createLabel("OS : "+(String) SessionDataManager.getInstance().getSessionData("osName").toString().toUpperCase(), ExtentColor.GREEN));
 		executor.executeTestCase(testCase);
 		ExcelManager.getInstance().getExcelReader().setCellData(PASS, testRow, resultColumn, testDataPath, testDataSheet);
 	}
