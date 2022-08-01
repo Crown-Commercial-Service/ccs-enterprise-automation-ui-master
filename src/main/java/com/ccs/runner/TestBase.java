@@ -132,15 +132,24 @@ public class TestBase implements GlobalVariables{
 		if (capabilities.getCapability("build")!=null) {
 			capabilities.setCapability("build",capabilities.getCapability("build")+strDate);
 		}
-		String username = System.getenv("BROWSERSTACK_USERNAME");
+		/**String username = System.getenv("BROWSERSTACK_USERNAME");
+		if (username == null) {
+			username = (String) config.get("user");
+		}*/
+
+		String username = System.getProperty("bs.user");
+		String accessKey = System.getProperty("bs.key");
 		if (username == null) {
 			username = (String) config.get("user");
 		}
-
-		String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
 		if (accessKey == null) {
 			accessKey = (String) config.get("key");
 		}
+
+		/**String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
+		if (accessKey == null) {
+			accessKey = (String) config.get("key");
+		}*/
 
 		if (capabilities.getCapability("browserstack.local") != null
 				&& capabilities.getCapability("browserstack.local") == "true") {
@@ -151,7 +160,7 @@ public class TestBase implements GlobalVariables{
 		}
 
 		capabilities.setCapability("browserstack.idleTimeout", "240");
-
+		Logs.info("http://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub");
 		driver.set(new RemoteWebDriver(
 				new URL("http://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub"), capabilities));
 		driver.get().manage().window().maximize();
