@@ -19,6 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
@@ -67,8 +68,16 @@ public class TestBase implements GlobalVariables{
 	@BeforeMethod
 	@org.testng.annotations.Parameters(value = { "config", "environment" })
 	public void initialization(String config_file, String environment) throws Exception {
-		WebDriver driver = launchBrowser(config_file,environment);
-		DriverManager.getInstance().setDriver(driver);
+		String mode = Config.getProperty("mode");
+		if (mode.equalsIgnoreCase("LOCAL")){
+			WebDriver driver = launchBrowser();
+			DriverManager.getInstance().setDriver(driver);
+		}
+		else{
+			WebDriver driver = launchBrowser(config_file,environment);
+			DriverManager.getInstance().setDriver(driver);
+		}
+
 	}
 
 	@AfterMethod
@@ -167,7 +176,19 @@ public class TestBase implements GlobalVariables{
 		driver.get().navigate().to(url);
 		return driver.get();
 	}
-
+	private static WebDriver launchBrowser() throws Exception {
+		String browser = Config.getProperty("browser");
+		String url = Config.getProperty("url");
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.setAcceptInsecureCerts(true);
+		chromeOptions.setExperimentalOption("useAutomationExtension", false);
+		chromeOptions.addArguments("--no-sandbox");
+		chromeOptions.addArguments("--disable-dev-shm-usage");
+		driver.set(new RemoteWebDriver(new URL("http://localhost:4444/"), chromeOptions));
+		driver.get().manage().window().maximize();
+		driver.get().navigate().to(url);
+		return driver.get();
+	}
 	public static Properties propertyLoader(String directory){
 		obj_properties = new Properties();
 		BufferedReader reader;
