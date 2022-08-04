@@ -133,7 +133,12 @@ public class ActionsClass implements GlobalVariables{
 	public void EnterValue(String value, String selector) throws InvalidLocatorException {
 		mngTextFieldPage.enterValue("xpath",obj_properties.getProperty(selector),value);
 	}
-
+	public void EnterRandomEmail(String value, String selector) throws InvalidLocatorException {
+		mngTextFieldPage.enterRandomEmail("xpath",obj_properties.getProperty(selector),value);
+	}
+	public void EnterRandomText(String value, String selector) throws InvalidLocatorException {
+		mngTextFieldPage.enterRandomText("xpath",obj_properties.getProperty(selector));
+	}
 	public void ClearValue(String value, String selector) throws InvalidLocatorException {
 		mngTextFieldPage.clearValue("xpath",obj_properties.getProperty(selector));
 	}

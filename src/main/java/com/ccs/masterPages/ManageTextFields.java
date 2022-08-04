@@ -9,6 +9,7 @@
 package com.ccs.masterPages;
 
 import com.ccs.masterConfig.DriverManager;
+import com.ccs.masterConfig.SessionDataManager;
 import com.ccs.utility.ElementOperations;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.TestNGException;
+
+import java.util.Calendar;
+
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
 
 /*
 @Purpose: This class contains functions for textfields
@@ -47,6 +53,30 @@ public class ManageTextFields extends ElementOperations {
 		try {
 			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
 			element.clear();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new TestNGException("Unable to clear the value in: " + accessName,
+					e);
+		}
+	}
+	public void enterRandomEmail(String accessType, String accessName, String domain) {
+		try {
+			String email = randomAlphanumeric(10)+"@"+domain;
+			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
+			element.sendKeys(email);
+			SessionDataManager.getInstance().setSessionData(accessName,email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new TestNGException("Unable to clear the value in: " + accessName,
+					e);
+		}
+	}
+	public void enterRandomText(String accessType, String accessName) {
+		try {
+			String randomText = "Automation_"+randomAlphabetic(5);
+			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
+			element.sendKeys(randomText);
+			SessionDataManager.getInstance().setSessionData(accessName,randomText);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new TestNGException("Unable to clear the value in: " + accessName,

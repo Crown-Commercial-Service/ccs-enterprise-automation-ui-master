@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ccs</groupId>
 	<artifactId>CCS-Web-Master</artifactId>
-	<version>1.0.1o</version>
+	<version>1.0.1q</version>
 
 	<properties>
 		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
