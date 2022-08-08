@@ -20,6 +20,8 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.TestNGException;
+
+import java.time.Duration;
 import java.util.List;
 
 /*
@@ -35,7 +37,7 @@ public class ManageElements extends ElementOperations {
 
 	public ManageElements() {
 		driver = DriverManager.getInstance().getDriver();
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, implicitWaitTime), this);
 	}
 	public void clickOnElement(String accessType, String accessName) throws InvalidLocatorException {
@@ -68,8 +70,7 @@ public class ManageElements extends ElementOperations {
 	}
 	public void waitForElementPresence(String accessType, String accessName) {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver,
-					30);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			wait.until(ExpectedConditions.presenceOfElementLocated(ElementOperations.getElementBy(accessType, accessName)));
 		} catch (Exception e) {
 			throw new TestNGException("Element with xpath:"+accessName + " not found in the page.", e);
@@ -77,8 +78,7 @@ public class ManageElements extends ElementOperations {
 	}
 	public void waitForElementInvisiblity(String accessType, String accessName) {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver,
-					30);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(ElementOperations.getElementBy(accessType, accessName)));
 		} catch (Exception e) {
 			throw new TestNGException("Element with xpath:"+accessName + " still visible in the page.", e);
@@ -87,8 +87,7 @@ public class ManageElements extends ElementOperations {
 	}
 	public void waitForElementToBeClickable(String accessType, String accessName) {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver,
-					30);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
 		} catch (Exception e) {
 			throw new TestNGException("Element with xpath:"+accessName + " not clickable in the page.", e);

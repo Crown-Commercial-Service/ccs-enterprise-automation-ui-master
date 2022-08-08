@@ -17,6 +17,8 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.TestNGException;
+
+import java.time.Duration;
 import java.util.List;
 
 /*
@@ -32,7 +34,7 @@ public class ManageDropdowns extends ElementOperations {
 
 	public ManageDropdowns() {
 		driver = DriverManager.getInstance().getDriver();
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, implicitWaitTime), this);
 	}
 	public void selectOption(String accessType, String accessName, String selectOption) {

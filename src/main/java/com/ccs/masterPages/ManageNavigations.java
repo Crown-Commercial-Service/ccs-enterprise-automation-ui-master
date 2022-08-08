@@ -16,6 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 /*
 @Purpose: This class contains functions for web navigations
 @Author: Mibin Boban, CCS Senior QAT Analyst
@@ -29,7 +31,7 @@ public class ManageNavigations extends ElementOperations {
 
 	public ManageNavigations() {
 		driver = DriverManager.getInstance().getDriver();
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, implicitWaitTime), this);
 	}
 	public void navigateTo(String url)

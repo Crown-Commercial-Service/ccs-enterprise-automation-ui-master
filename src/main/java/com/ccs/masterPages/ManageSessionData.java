@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.TestNGException;
 
+import java.time.Duration;
+
 /*
 @Purpose: This class contains functions for managing runtime data
 @Author: Mibin Boban, CCS Senior QAT Analyst
@@ -33,7 +35,7 @@ public class ManageSessionData extends ElementOperations {
 
 	public ManageSessionData() {
 		driver = DriverManager.getInstance().getDriver();
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, implicitWaitTime), this);
 	}
 	public void saveElemText(String accessType, String accessName,String key) throws InvalidLocatorException {

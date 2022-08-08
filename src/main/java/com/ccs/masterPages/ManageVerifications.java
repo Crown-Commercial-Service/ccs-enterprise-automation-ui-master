@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.TestNGException;
 
+import java.time.Duration;
+
 /*
 @Purpose: This class contains functions for verifications
 @Author: Mibin Boban, CCS Senior QAT Analyst
@@ -31,7 +33,7 @@ public class ManageVerifications extends ElementOperations {
 
 	public ManageVerifications() {
 		driver = DriverManager.getInstance().getDriver();
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, implicitWaitTime), this);
 	}
 	public void assertTextEqual(String accessType, String accessName, String expected) {

@@ -18,6 +18,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.TestNGException;
 
+import java.time.Duration;
 import java.util.Calendar;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
@@ -36,7 +37,7 @@ public class ManageTextFields extends ElementOperations {
 
 	public ManageTextFields() {
 		driver = DriverManager.getInstance().getDriver();
-		wait = new WebDriverWait(driver, 30);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		PageFactory.initElements(new AjaxElementLocatorFactory(driver, implicitWaitTime), this);
 	}
 	public void enterValue(String accessType, String accessName, String value) {
