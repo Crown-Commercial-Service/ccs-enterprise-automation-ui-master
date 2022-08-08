@@ -42,8 +42,9 @@ public class ManageElements extends ElementOperations {
 	}
 	public void clickOnElement(String accessType, String accessName) throws InvalidLocatorException {
 		try{
-			element = wait.until(ExpectedConditions.presenceOfElementLocated(ElementOperations.getElementBy(accessType, accessName)));
-			element.click();
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			element = wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		}catch (Exception e){
 			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
 		}
