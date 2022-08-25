@@ -60,24 +60,24 @@ public class ManageTextFields extends ElementOperations {
 					e);
 		}
 	}
-	public void enterRandomEmail(String accessType, String accessName, String domain) {
+	public void enterRandomEmail(String accessType, String accessName, String domain, String key) {
 		try {
 			String email = randomAlphanumeric(10)+"@"+domain;
 			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
 			element.sendKeys(email);
-			SessionDataManager.getInstance().setSessionData(accessName,email);
+			SessionDataManager.getInstance().setSessionData(key,email);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new TestNGException("Unable to clear the value in: " + accessName,
 					e);
 		}
 	}
-	public void enterRandomText(String accessType, String accessName) {
+	public void enterRandomText(String accessType, String accessName,String key) {
 		try {
-			String randomText = "Automation_"+randomAlphabetic(5);
+			String randomText = "Automation"+randomAlphabetic(5);
 			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
 			element.sendKeys(randomText);
-			SessionDataManager.getInstance().setSessionData(accessName,randomText);
+			SessionDataManager.getInstance().setSessionData(key,randomText);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new TestNGException("Unable to clear the value in: " + accessName,

@@ -46,7 +46,7 @@ public class ManageSessionData extends ElementOperations {
 	public void verifyTextWithSavedData(String accessType, String accessName,String key) throws InvalidLocatorException {
 		try{
 			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
-			Assert.assertEquals(element.getText(),SessionDataManager.getInstance().getSessionData(key));
+			Assert.assertEquals(element.getText().trim(),SessionDataManager.getInstance().getSessionData(key));
 		}catch (Exception e){
 			e.printStackTrace();
 			throw new TestNGException("Unable to assert the value with: " + key,

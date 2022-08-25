@@ -102,5 +102,17 @@ public class ManageVerifications extends ElementOperations {
 					e);
 		}
 	}
+	public void assertCheckboxSelected(String accessType, String accessName,String value) {
+		try {
+			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
+			boolean actual = element.isSelected();
+			boolean expected = Boolean.parseBoolean(value);
+			Assert.assertEquals(actual, expected);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new TestNGException("The assertion failed: " + accessName,
+					e);
+		}
+	}
 
 }

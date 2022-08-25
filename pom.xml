@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ccs</groupId>
 	<artifactId>CCS-Web-Master</artifactId>
-	<version>1.0.1t</version>
+	<version>1.0.1.d</version>
 
 	<properties>
 		<suiteXmlFile>${basedir}/testng.xml</suiteXmlFile>
@@ -69,6 +69,11 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>io.percy</groupId>
+			<artifactId>percy-java-selenium</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
 			<groupId>org.testng</groupId>

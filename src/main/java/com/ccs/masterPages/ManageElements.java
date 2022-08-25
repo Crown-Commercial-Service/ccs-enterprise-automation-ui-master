@@ -9,8 +9,11 @@
 package com.ccs.masterPages;
 
 import com.ccs.masterConfig.DriverManager;
+import com.ccs.masterConfig.SessionDataManager;
 import com.ccs.masterExceptions.InvalidLocatorException;
+import com.ccs.runner.TestBase;
 import com.ccs.utility.ElementOperations;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +37,7 @@ public class ManageElements extends ElementOperations {
 	private WebDriver driver;
 	private WebElement element=null;
 	private WebDriverWait wait = null;
+	private static final Logger Logs = Logger.getLogger(TestBase.class.getName());
 
 	public ManageElements() {
 		driver = DriverManager.getInstance().getDriver();
@@ -45,6 +49,29 @@ public class ManageElements extends ElementOperations {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			element = wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		}catch (Exception e){
+			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
+		}
+
+	}
+	public void clickOnParamElement(String accessType, String accessName, String value) throws InvalidLocatorException {
+		try{
+			String expectedString = (String) SessionDataManager.getInstance().getSessionData(value);
+			accessName = accessName.replaceAll("#",expectedString);
+			Logs.info("Updated xpath: "+accessName);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			element = wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		}catch (Exception e){
+			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
+		}
+
+	}
+	public void selectCheckbox(String accessType, String accessName) throws InvalidLocatorException {
+		try{
+			element = wait.until(ExpectedConditions.presenceOfElementLocated(ElementOperations.getElementBy(accessType, accessName)));
+			Actions action = new Actions(driver);
+			action.moveToElement(element).click().build().perform();
 		}catch (Exception e){
 			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
 		}

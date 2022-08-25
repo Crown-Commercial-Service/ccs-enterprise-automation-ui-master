@@ -8,6 +8,7 @@
  */
 package com.ccs.masterConfig;
 
+import io.percy.selenium.Percy;
 import org.openqa.selenium.WebDriver;
 
 /*
@@ -19,6 +20,7 @@ public class DriverManager {
 
 	private static DriverManager DRIVER_MANAGER;
 	private static ThreadLocal<WebDriver> tDriver = new ThreadLocal<>();
+	private static Percy percy;
 
 	private DriverManager() {
 		
@@ -38,7 +40,11 @@ public class DriverManager {
 	public synchronized void setDriver (WebDriver driver) {
 		tDriver.set(driver);
 	}
+	public synchronized void setPercyDriver(WebDriver driver){percy=new Percy(driver);}
 
+	public synchronized Percy getPercy(){
+		return percy;
+	}
 	public synchronized WebDriver getDriver () {
 		WebDriver driver = tDriver.get();
 		if (driver == null) {

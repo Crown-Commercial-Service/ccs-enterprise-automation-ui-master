@@ -69,19 +69,50 @@ public class TestBase implements GlobalVariables{
 	@org.testng.annotations.Parameters(value = { "config", "environment" })
 	public void initialization(String config_file, String environment) throws Exception {
 		String mode = Config.getProperty("mode");
+		String percy= Config.getProperty("visual_testing");
 		if (mode.equalsIgnoreCase("LOCAL")){
 			WebDriver driver = launchBrowser();
 			DriverManager.getInstance().setDriver(driver);
+			if (percy.equalsIgnoreCase("ON")) {
+				DriverManager.getInstance().setPercyDriver(driver);
+			}
 		}
 		else{
 			WebDriver driver = launchBrowser(config_file,environment);
 			DriverManager.getInstance().setDriver(driver);
+			if (percy.equalsIgnoreCase("ON")) {
+				DriverManager.getInstance().setPercyDriver(driver);
+			}
 		}
 
 	}
 
 	@AfterMethod
 	public void updateStatus(ITestResult result) throws Exception {
+		String mode = Config.getProperty("mode");
+		String percy= Config.getProperty("visual_testing");
+		if (mode.equalsIgnoreCase("LOCAL")){
+			updateStatuswithGrid(result);
+		}
+		else {
+			updateStatuswithBS(result);
+		}
+	}
+	public void updateStatuswithGrid(ITestResult result){
+		String status = SKIP;
+		if(result.getStatus() == ITestResult.FAILURE) {
+			status = FAIL;
+		}
+		if(result.getStatus() == ITestResult.SUCCESS) {
+			status = PASS;
+		}
+		Logs.info("Closing all the browser.");
+		String testCaseName = (String) SessionDataManager.getInstance().getSessionData("testCaseName");
+		ReportManager.endTest();
+		DriverManager.getInstance().getDriver().quit();
+		Log.endTestCase(testCaseName+" "+status);
+	}
+	public void updateStatuswithBS(ITestResult result) throws Exception {
 		String status = SKIP;
 		JavascriptExecutor jse = (JavascriptExecutor)driver.get();
 		if(result.getStatus() == ITestResult.FAILURE) {
@@ -105,7 +136,6 @@ public class TestBase implements GlobalVariables{
 			l.stop();
 		}
 	}
-
 	private static WebDriver launchBrowser(String config_file, String environment) throws Exception {
 		String url = Config.getProperty("url");
 		JSONParser parser = new JSONParser();
@@ -169,6 +199,7 @@ public class TestBase implements GlobalVariables{
 		}
 
 		capabilities.setCapability("browserstack.idleTimeout", "240");
+		capabilities.setCapability("browserstack.networkLogs",true);
 		Logs.info("http://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub");
 		driver.set(new RemoteWebDriver(
 				new URL("http://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub"), capabilities));
@@ -179,6 +210,10 @@ public class TestBase implements GlobalVariables{
 	private static WebDriver launchBrowser() throws Exception {
 		String browser = Config.getProperty("browser");
 		String url = Config.getProperty("url");
+
+		SessionDataManager.getInstance().setSessionData("envName", browser);
+		SessionDataManager.getInstance().setSessionData("osName", "Local");
+
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.setAcceptInsecureCerts(true);
 		chromeOptions.setExperimentalOption("useAutomationExtension", false);

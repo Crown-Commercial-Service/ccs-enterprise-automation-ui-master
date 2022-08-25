@@ -30,13 +30,19 @@ public class ActionsClass implements GlobalVariables{
 	private ManageVerifications mngVerifications = new ManageVerifications();
 	private ManageTextFields mngTextFieldPage = new ManageTextFields();
 	private ManageSessionData mngSessionData = new ManageSessionData();
+	private ManagePercy mngPercy = new ManagePercy();
 
 	public void NavigateTo(String value, String selector) {
 		navigationPage.navigateTo(value);
 	}
-
+	public void TakePercySnapshot(String value, String selector){
+		mngPercy.takePercySnapshot(value);
+	}
 	public void ClickOnElement(String value, String selector) throws InvalidLocatorException {
 		mngElemPage.clickOnElement("xpath",obj_properties.getProperty(selector));
+	}
+	public void SelectCheckbox(String value, String selector) throws InvalidLocatorException {
+		mngElemPage.selectCheckbox("xpath",obj_properties.getProperty(selector));
 	}
 
 	public void HighlightElement(String value, String selector) throws InvalidLocatorException {
@@ -129,15 +135,18 @@ public class ActionsClass implements GlobalVariables{
 	public void VerifyElemAbsent(String value, String selector) throws InvalidLocatorException {
 		mngVerifications.assertPresenceFalse("xpath",obj_properties.getProperty(selector));
 	}
+	public void IsCheckboxSelected(String value, String selector) throws InvalidLocatorException {
+		mngVerifications.assertCheckboxSelected("xpath",obj_properties.getProperty(selector),value);
+	}
 
 	public void EnterValue(String value, String selector) throws InvalidLocatorException {
 		mngTextFieldPage.enterValue("xpath",obj_properties.getProperty(selector),value);
 	}
 	public void EnterRandomEmail(String value, String selector) throws InvalidLocatorException {
-		mngTextFieldPage.enterRandomEmail("xpath",obj_properties.getProperty(selector),value);
+		mngTextFieldPage.enterRandomEmail("xpath",obj_properties.getProperty(selector),value,selector);
 	}
 	public void EnterRandomText(String value, String selector) throws InvalidLocatorException {
-		mngTextFieldPage.enterRandomText("xpath",obj_properties.getProperty(selector));
+		mngTextFieldPage.enterRandomText("xpath",obj_properties.getProperty(selector),selector);
 	}
 	public void ClearValue(String value, String selector) throws InvalidLocatorException {
 		mngTextFieldPage.clearValue("xpath",obj_properties.getProperty(selector));
@@ -157,6 +166,9 @@ public class ActionsClass implements GlobalVariables{
 
 	public void EnterSavedValue(String value, String selector) throws InvalidLocatorException {
 		mngSessionData.enterTextWithSavedData("xpath",obj_properties.getProperty(selector),value);
+	}
+	public void ClickWithParameter(String value, String selector) throws InvalidLocatorException {
+		mngElemPage.clickOnParamElement("xpath",obj_properties.getProperty(selector),value);
 	}
 
 }
