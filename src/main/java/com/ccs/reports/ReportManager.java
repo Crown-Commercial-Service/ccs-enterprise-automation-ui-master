@@ -28,14 +28,13 @@ public class ReportManager implements GlobalVariables{
 
 	private static ExtentReports createInstance() {
 		ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(htmlReportPath+htmlFileName);
-		htmlReporter.loadXMLConfig(new File(extentConfigFilePath));
+		htmlReporter.loadXMLConfig(extentConfigFilePath);
+		//htmlReporter.loadXMLConfig(new File(extentConfigFilePath));
 		extent = new ExtentReports();
 		extent.setSystemInfo("Framework: ", "CCS Enterprise Automation-Web");
-		extent.setSystemInfo("User: ", System.getProperty("user.name"));	
+		extent.setSystemInfo("Author: ", "Mibin Boban");
+		extent.setSystemInfo("Executed By: ", System.getProperty("user.name"));
 		extent.setSystemInfo("URL: ", Config.getProperty("url"));
-		extent.setSystemInfo("Browser: ", Config.getProperty("browser"));
-		extent.setSystemInfo("OS: ", System.getProperty("os.name"));
-		extent.setSystemInfo("Version: ", System.getProperty("os.version"));		
 		extent.attachReporter(htmlReporter); 
 		return extent;
 	}

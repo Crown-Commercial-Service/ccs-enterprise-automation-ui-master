@@ -15,6 +15,7 @@ import com.ccs.runner.TestBase;
 import com.ccs.utility.ElementOperations;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -54,6 +55,16 @@ public class ManageElements extends ElementOperations {
 		}
 
 	}
+	public void enterKey(String accessType, String accessName) throws InvalidLocatorException {
+		try{
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			element = wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
+			element.sendKeys(Keys.ENTER);
+		}catch (Exception e){
+			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
+		}
+
+	}
 	public void clickOnParamElement(String accessType, String accessName, String value) throws InvalidLocatorException {
 		try{
 			String expectedString = (String) SessionDataManager.getInstance().getSessionData(value);
@@ -62,6 +73,19 @@ public class ManageElements extends ElementOperations {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			element = wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
 			((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+		}catch (Exception e){
+			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
+		}
+
+	}
+	public void selectCheckboxwithParam(String accessType, String accessName, String value) throws InvalidLocatorException {
+		try{
+			String expectedString = (String) SessionDataManager.getInstance().getSessionData(value);
+			accessName = accessName.replaceAll("#",expectedString);
+			Logs.info("Updated xpath: "+accessName);
+			element = wait.until(ExpectedConditions.presenceOfElementLocated(ElementOperations.getElementBy(accessType, accessName)));
+			Actions action = new Actions(driver);
+			action.moveToElement(element).click().build().perform();
 		}catch (Exception e){
 			throw new TestNGException("Error occured while clicking on " + element.getText(), e);
 		}
