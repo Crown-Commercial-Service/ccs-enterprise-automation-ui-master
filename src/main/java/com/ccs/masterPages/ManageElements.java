@@ -19,12 +19,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.TestNGException;
 
+import javax.swing.*;
 import java.time.Duration;
 import java.util.List;
 
@@ -195,6 +199,35 @@ public class ManageElements extends ElementOperations {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new TestNGException("Not able to double click on: " + accessName, e);
+		}
+	}
+	public void unCheckOption(String accessType, String accessName) {
+		try {
+			element= driver.findElement(ElementOperations.getElementBy(accessType, accessName));
+			if (element.isSelected()){
+				Actions action = new Actions(driver);
+				action.moveToElement(element).click().build().perform();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new TestNGException("The check box uncheck failed: " + accessName,
+					e);
+		}
+	}
+	public void uploadFile(String accessType, String accessName, String filePath) {
+		try {
+			element = wait.until(ExpectedConditions.elementToBeClickable(ElementOperations.getElementBy(accessType, accessName)));
+			((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
+			((RemoteWebElement)element).setFileDetector(new LocalFileDetector());
+			Logs.info("File to be uploaded: "+System.getProperty("user.dir")+filePath);
+			element.sendKeys(System.getProperty("user.dir")+filePath);
+
+		} catch (Exception e) {
+			e.getMessage();
+			e.getLocalizedMessage();
+			e.printStackTrace();
+			throw new TestNGException("The file upload is failed: " + accessName,
+					e);
 		}
 	}
 

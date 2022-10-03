@@ -48,7 +48,9 @@ public class ActionsClass implements GlobalVariables{
 	public void HighlightElement(String value, String selector) throws InvalidLocatorException {
 		mngElemPage.elementHighlight("xpath",obj_properties.getProperty(selector));
 	}
-
+	public void UploadFile(String value, String selector) throws InvalidLocatorException {
+		mngElemPage.uploadFile("xpath",obj_properties.getProperty(selector),value);
+	}
 	public void HoverOnElement(String value, String selector) throws InvalidLocatorException {
 		mngElemPage.hoverOnElement("xpath",obj_properties.getProperty(selector));
 	}
@@ -174,6 +176,9 @@ public class ActionsClass implements GlobalVariables{
 	}
 	public void SelectWithParameter(String value, String selector) throws InvalidLocatorException {
 		mngElemPage.selectCheckboxwithParam("xpath",obj_properties.getProperty(selector),value);
+	}
+	public void UnCheckOption(String value, String selector) throws InvalidLocatorException {
+		mngElemPage.unCheckOption("xpath",obj_properties.getProperty(selector));
 	}
 
 }
